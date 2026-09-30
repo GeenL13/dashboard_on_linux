@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/can_data_collect.dir/core/main.c.o CMakeFiles/can_data_collect.dir/core/can.c.o CMakeFiles/can_data_collect.dir/app/can_receive.c.o CMakeFiles/can_data_collect.dir/app/connect_to_display.c.o -o can_data_collect 

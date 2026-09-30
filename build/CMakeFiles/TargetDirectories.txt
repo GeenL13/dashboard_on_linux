@@ -1,7 +1,0 @@
-/home/lianz/codes/candata_collect/build/CMakeFiles/can_data_collect.dir
-/home/lianz/codes/candata_collect/build/CMakeFiles/edit_cache.dir
-/home/lianz/codes/candata_collect/build/CMakeFiles/rebuild_cache.dir
-/home/lianz/codes/candata_collect/build/CMakeFiles/list_install_components.dir
-/home/lianz/codes/candata_collect/build/CMakeFiles/install.dir
-/home/lianz/codes/candata_collect/build/CMakeFiles/install/local.dir
-/home/lianz/codes/candata_collect/build/CMakeFiles/install/strip.dir
