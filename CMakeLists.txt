@@ -52,9 +52,10 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/core
         ${CMAKE_CURRENT_SOURCE_DIR}/app
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/shared.h
 
 )
+
+target_compile_definitions(can_data_collect PRIVATE _DEFAULT_SOURCE)
 
 # 链接 POSIX 线程库。
 target_link_libraries(${PROJECT_NAME}

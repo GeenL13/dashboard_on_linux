@@ -3,6 +3,9 @@
 
 #include "main.h"
 #include "can.h"
+#include <pthread.h>
+#include <errno.h>
+#include <string.h>
 
 // 显示id结构体
 #define MAX_DISPLAY_CAN_ID 128
@@ -29,15 +32,10 @@ typedef struct
     can_frame_t frame[MAX_CAN_FRAME]; // can帧数组
     uint32_t head; // 头指针
     uint32_t tail; // 尾指针
+    uint32_t count; // 当前帧数
     pthread_mutex_t mutex; // 互斥锁
 } can_frame_array_t;
 
-typedef struct
-{
-    struct can_frame frame[MAX_DISPLAY_CAN_ID]; // can帧数组
-    uint32_t length; // can帧数量
-    pthread_mutex_t mutex; // 互斥锁
-} can_frame_array_t;
 
 // 线程共享结构体
 typedef struct

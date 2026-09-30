@@ -1,4 +1,6 @@
 #include "can.h"
+#include <error.h>
+
 
 void can_init(can_t *hcan, const char *ifname)
 {
@@ -6,7 +8,8 @@ void can_init(can_t *hcan, const char *ifname)
     hcan->sockfd = socket(PF_CAN, SOCK_RAW, CAN_RAW);
     if (0 > hcan->sockfd)
     {
-        perror("%s: socket error", ifname);
+        printf("%s: socket error", ifname);
+        perror("socket error");
         exit(EXIT_FAILURE);
     }
 
@@ -20,7 +23,8 @@ void can_init(can_t *hcan, const char *ifname)
     int res = bind(hcan->sockfd, (struct sockaddr *)&hcan->can_addr, sizeof(hcan->can_addr));
     if (res < 0)
     {
-        perror("%s: bind error", ifname);
+        printf("%s: bind error", ifname);
+        perror("bind error");
         close(hcan->sockfd);
         exit(EXIT_FAILURE);
     }
@@ -35,7 +39,8 @@ void can_filter_config(can_t *hcan, uint32_t can_id, uint32_t can_mask)
     int res = setsockopt(hcan->sockfd, SOL_CAN_RAW, CAN_RAW_FILTER, &hcan->filter, sizeof(hcan->filter));
     if (res < 0)
     {
-        perror("%s: setsockopt error", hcan->ifr.ifr_name);
+        printf("%s: setsockopt error", hcan->ifr.ifr_name);
+        perror("setsockopt error");
         close(hcan->sockfd);
         exit(EXIT_FAILURE);
     }
