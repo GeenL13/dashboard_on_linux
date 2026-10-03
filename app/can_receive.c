@@ -37,7 +37,7 @@ void* can_receive_task(void *arg)
     printf("thread creat success: %d", (int)pthread_self());
 
     // can初始化
-    can_init(hcan, "can0"); // 后续应该改成根据参数传入的can实例进行初始化
+    can_init(hcan); // 后续应该改成根据参数传入的can实例进行初始化
     // can接收任务
     printf("can receive task...\n");
     while (1)
@@ -52,13 +52,13 @@ void* can_receive_task(void *arg)
         }
         info.rx_count++;
         // 打印接收到的can数据
-        printf("can_id: 0x%X, can_dlc: %d, data: ", hcan->frame_rx.can_id, hcan->frame_rx.can_dlc);
-        for (uint32_t i = 0; i < hcan->frame_rx.can_dlc; i++)
-        {
-            printf("%02X ", hcan->frame_rx.data[i]);
-        }
-        printf("rx_count: %u, error_count: %u", info.rx_count, info.error_count);
-        printf("\n");
+        // printf("can_id: 0x%X, can_dlc: %d, data: ", hcan->frame_rx.can_id, hcan->frame_rx.can_dlc);
+        // for (uint32_t i = 0; i < hcan->frame_rx.can_dlc; i++)
+        // {
+        //     printf("%02X ", hcan->frame_rx.data[i]);
+        // }
+        // printf("rx_count: %u, error_count: %u", info.rx_count, info.error_count);
+        // printf("\n");
         // 若为ui需要的数据，则将数据发送给qt
         for (uint32_t i = 0; i < display_ids->length; i++)
         {
@@ -78,6 +78,7 @@ void* can_receive_task(void *arg)
         // 处理接收到的can数据
         // 填入can数据帧
         can_frame_t can_frame;
+        can_frame.channel = hcan->channel;
         can_frame.timestamp_us = get_timestamp_us();
         can_frame.can_id = hcan->frame_rx.can_id;
         can_frame.dlc = hcan->frame_rx.can_dlc;

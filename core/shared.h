@@ -19,6 +19,7 @@ typedef struct
 // can帧存储结构体
 typedef struct
 {
+    uint8_t channel; // can通道
     uint8_t data[8]; // can数据
     uint8_t dlc; // can数据长度
     uint32_t can_id; // can_id

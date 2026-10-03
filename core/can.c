@@ -2,8 +2,9 @@
 #include <error.h>
 
 
-void can_init(can_t *hcan, const char *ifname)
+void can_init(can_t *hcan)
 {
+    char *ifname = hcan->can_name;
     // 创建socket
     hcan->sockfd = socket(PF_CAN, SOCK_RAW, CAN_RAW);
     if (0 > hcan->sockfd)
