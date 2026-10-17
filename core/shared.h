@@ -7,14 +7,24 @@
 #include <errno.h>
 #include <string.h>
 
+
+// 显示id帧结构体
+typedef struct
+{
+    uint8_t channel; // can通道
+    uint32_t display_can_id; // 需要显示的can_id
+} display_id_frame_t;
+
 // 显示id结构体
 #define MAX_DISPLAY_CAN_ID 128
 typedef struct
 {
-    uint32_t display_can_id[MAX_DISPLAY_CAN_ID]; // 需要显示的can_id
+    display_id_frame_t display_id_frame[MAX_DISPLAY_CAN_ID]; // 需要显示的can_id
     uint32_t length; // canid数量
     pthread_mutex_t mutex; // 互斥锁
 } display_id_t;
+
+
 
 // can帧存储结构体
 typedef struct
@@ -43,6 +53,7 @@ typedef struct
 {
     display_id_t display_ids; // 显示id结构体
     can_frame_array_t can_frames; // can帧数组结构体
+    can_frame_array_t can_frames_display; // can帧数组结构体，用于显示
 } shared_data_t;
 
 
